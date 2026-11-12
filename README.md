@@ -12,7 +12,7 @@ Proyecto de análisis de los cinco archivos de Instacart, desarrollado por activ
 |---|---|---|---|
 | Entorno y exploración inicial | Entorno virtual, instalación de Pandas y JupyterLab, carga y exploración de las cinco tablas | [`notebooks/00_entorno.ipynb`](notebooks/00_entorno.ipynb), [`notebooks/01_exploracion_instacart.ipynb`](notebooks/01_exploracion_instacart.ipynb) | — |
 | Diagnóstico inicial de calidad | Estructura, tipos, nulos, duplicados, rangos e integridad de claves | [`notebooks/data_quality.ipynb`](notebooks/data_quality.ipynb) | [`reports/data_quality.md`](reports/data_quality.md) |
-| GA1-220501094-01-AA1-EV06: limpieza, análisis y estructuración con Pandas | Lecciones 2, 3 y 4: laboratorios guiados y 21 ejercicios de reto | [`notebooks/pandas_labs.ipynb`](notebooks/pandas_labs.ipynb) | [`reports/data_processing.md`](reports/data_processing.md) |
+| GA1-220501094-01-AA1-EV06: limpieza, análisis y estructuración con Pandas | Lecciones 2, 3 y 4: laboratorios guiados y 21 ejercicios de reto | Índice [`notebooks/pandas_labs.ipynb`](notebooks/pandas_labs.ipynb) y un notebook por lección: [`lesson_2_data_cleaning`](notebooks/lesson_2_data_cleaning.ipynb), [`lesson_3_data_analysis`](notebooks/lesson_3_data_analysis.ipynb), [`lesson_4_data_merging`](notebooks/lesson_4_data_merging.ipynb) | [`reports/data_processing.md`](reports/data_processing.md) |
 
 ## Preguntas del proyecto
 
@@ -48,13 +48,16 @@ instacart-analisis/
 │   │   ├── products.csv
 │   │   ├── aisles.csv
 │   │   └── departments.csv
-│   └── processed/                    # Archivos generados por pandas_labs.ipynb
+│   └── processed/                    # Archivos generados por los notebooks de lección
 │
 ├── notebooks/
 │   ├── 00_entorno.ipynb              # Actividad anterior: verificación del entorno
 │   ├── 01_exploracion_instacart.ipynb  # Actividad anterior: exploración inicial
 │   ├── data_quality.ipynb            # Actividad anterior: diagnóstico de calidad
-│   └── pandas_labs.ipynb             # Lecciones 2, 3 y 4
+│   ├── pandas_labs.ipynb             # Índice de las lecciones 2, 3 y 4 y conclusiones
+│   ├── lesson_2_data_cleaning.ipynb  # Lección 2: limpieza y estandarización
+│   ├── lesson_3_data_analysis.ipynb  # Lección 3: filtrado, ordenamiento y agrupación
+│   └── lesson_4_data_merging.ipynb   # Lección 4: combinación de datasets
 │
 └── reports/
     ├── data_quality.md               # Actividad anterior: informe de diagnóstico
@@ -79,26 +82,34 @@ Si PowerShell bloquea la activación del entorno, ejecute antes `Set-ExecutionPo
 
 1. Verifique que los cinco CSV estén en `data/raw/`.
 2. Abra Jupyter con `jupyter lab` (o abra el notebook en VS Code) y seleccione el kernel del entorno `.venv`.
-3. Ejecute los notebooks completos con **Run All**. Para esta actividad basta con `notebooks/pandas_labs.ipynb` (alrededor de un minuto); los notebooks de las actividades anteriores (`00_entorno`, `01_exploracion_instacart`, `data_quality`) se pueden ejecutar de forma independiente. Las lecciones de `pandas_labs.ipynb` comparten variables, así que debe ejecutarse completo y en orden, no por celdas sueltas.
+3. Ejecute cada notebook completo con **Run All**, en este orden:
+   1. `notebooks/lesson_2_data_cleaning.ipynb`: lee los CSV de `data/raw/` y guarda las tablas limpias en `data/processed/`. Debe ejecutarse primero.
+   2. `notebooks/lesson_3_data_analysis.ipynb` y `notebooks/lesson_4_data_merging.ipynb`: parten de las tablas limpias de la Lección 2. Si no existen, el notebook se detiene con un mensaje que pide ejecutar primero la Lección 2.
+   3. `notebooks/pandas_labs.ipynb` (opcional): índice que comprueba qué archivos procesados existen y reúne las conclusiones generales.
+
+   La ejecución completa de las tres lecciones tarda alrededor de un minuto. Los notebooks de las actividades anteriores (`00_entorno`, `01_exploracion_instacart`, `data_quality`) se ejecutan de forma independiente.
 
 Alternativa sin abrir Jupyter, desde la carpeta `notebooks/`:
 
 ```bash
 cd notebooks
+jupyter nbconvert --to notebook --execute --inplace lesson_2_data_cleaning.ipynb
+jupyter nbconvert --to notebook --execute --inplace lesson_3_data_analysis.ipynb
+jupyter nbconvert --to notebook --execute --inplace lesson_4_data_merging.ipynb
 jupyter nbconvert --to notebook --execute --inplace pandas_labs.ipynb
 ```
 
-`pandas_labs.ipynb` crea la carpeta `data/processed/` si no existe y vuelve a generar todos sus archivos en cada ejecución.
+Cada lección crea la carpeta `data/processed/` si no existe y vuelve a generar sus archivos en cada ejecución.
 
-## Contenido de `pandas_labs.ipynb`
+## Contenido de los notebooks de lección
 
-| Lección | Ejemplos | Laboratorio guiado | Reto |
+| Notebook | Ejemplos | Laboratorio guiado | Reto |
 |---|---|---|---|
-| 2. Limpieza y estandarización | Duplicados, tipos con `astype`, nulos, texto con `.str`, duplicados implícitos, funciones de limpieza | Pipeline de limpieza con `pipe` e informe de cambios | 7 ejercicios |
-| 3. Filtrado, ordenamiento y agrupación | Máscaras booleanas, `query`, `sort_values`, `nlargest`, `groupby`/`agg`, `pivot_table`, `transform` | Perfil de hábitos de compra por segmento de cliente y franja horaria | 7 ejercicios |
-| 4. Combinación de datasets | `merge` con `how`, `validate` e `indicator`, tabla maestra, `concat`, `pivot_table`/`melt`, Parquet | Tabla de análisis por producto y líder de recompra por departamento | 7 ejercicios |
+| `lesson_2_data_cleaning.ipynb` | Duplicados, tipos con `astype`, nulos, texto con `.str`, duplicados implícitos, funciones de limpieza | Pipeline de limpieza con `pipe` e informe de cambios | 7 ejercicios |
+| `lesson_3_data_analysis.ipynb` | Máscaras booleanas, `query`, `sort_values`, `nlargest`, `groupby`/`agg`, `pivot_table`, `transform` | Perfil de hábitos de compra por segmento de cliente y franja horaria | 7 ejercicios |
+| `lesson_4_data_merging.ipynb` | `merge` con `how`, `validate` e `indicator`, tabla maestra, `concat`, `pivot_table`/`melt`, Parquet | Tabla de análisis por producto y líder de recompra por departamento | 7 ejercicios |
 
-Cada ejercicio de reto tiene su código, el resultado ejecutado y una interpretación breve. El notebook termina con conclusiones generales.
+Cada ejercicio de reto tiene su código, el resultado ejecutado y una interpretación breve. Las conclusiones generales están en `pandas_labs.ipynb`.
 
 ## Archivos procesados (`data/processed/`)
 
@@ -111,7 +122,7 @@ Cada ejercicio de reto tiene su código, el resultado ejecutado y una interpreta
 | `orders_by_weekday.csv` | 3 | Pedidos, clientes y espera media por día de la semana | Sí |
 | `customer_segments.csv` | 3 | Clientes, pedidos y espera mediana por segmento | Sí |
 | `segment_time_profile.csv` | 3 | Porcentaje de pedidos de cada segmento por franja horaria | Sí |
-| `instacart_master.parquet` | 4 | Tabla maestra: 4.545.007 filas × 14 columnas con las cinco tablas unidas | **No** (≈104 MB, supera el límite de GitHub; se regenera con el notebook) |
+| `instacart_master.parquet` | 4 | Tabla maestra: 4.545.007 filas × 14 columnas con las cinco tablas unidas | **No** (≈104 MB, supera el límite de GitHub; se regenera con `lesson_4_data_merging.ipynb`) |
 | `department_summary.csv` | 4 | Artículos y tasa de recompra por departamento | Sí |
 | `orders_by_hour_weekday_long.csv` | 4 | Pedidos por hora y día en formato largo | Sí |
 | `product_profile.parquet` | 4 | Ficha por producto: veces, clientes, tasa de recompra y posición media | Sí |
@@ -165,6 +176,7 @@ Probado con Python 3.13.
 | `main` | Versión estable entregada |
 | `develop` | Rama de integración; recibe las ramas de cada actividad |
 | `feature/pandas-data-processing` | Actividad EV06: lecciones 2, 3 y 4 (fusionada en `develop`) |
+| `feature/lesson-notebooks` | Separación de las lecciones en un notebook por lección, a pedido del instructor (fusionada en `develop`) |
 
 Commits de la actividad EV06, uno por lección más la documentación:
 

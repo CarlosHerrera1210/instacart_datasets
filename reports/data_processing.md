@@ -11,7 +11,7 @@ Continuar el proyecto Instacart a partir del diagnóstico de calidad ([`data_qua
 
 **Pregunta orientadora:** ¿Cómo preparar y estructurar los datos de Instacart para obtener información confiable sobre los hábitos de compra?
 
-Todo el código, sus resultados y las interpretaciones de los 21 ejercicios están en [`notebooks/pandas_labs.ipynb`](../notebooks/pandas_labs.ipynb). Las cifras de este informe provienen de su ejecución completa con pandas 3.1.0.
+Todo el código, sus resultados y las interpretaciones de los 21 ejercicios están en un notebook por lección: [`lesson_2_data_cleaning.ipynb`](../notebooks/lesson_2_data_cleaning.ipynb), [`lesson_3_data_analysis.ipynb`](../notebooks/lesson_3_data_analysis.ipynb) y [`lesson_4_data_merging.ipynb`](../notebooks/lesson_4_data_merging.ipynb). El índice [`pandas_labs.ipynb`](../notebooks/pandas_labs.ipynb) indica el orden de ejecución y reúne las conclusiones generales. Las cifras de este informe provienen de su ejecución completa con pandas 3.1.0.
 
 ## 2. Lección 2: limpieza y estandarización
 
@@ -152,7 +152,7 @@ Todos los archivos se escriben en `data/processed/` al ejecutar el notebook. El 
 | Parquet | Tablas limpias y fichas (`orders_clean`, `products_clean`, `order_products_clean`, `product_profile`): conservan los tipos y ocupan menos |
 | CSV | Resúmenes pequeños para abrir en Excel (informe de limpieza, segmentos, departamentos, líderes, tablas por día) |
 
-La tabla maestra `instacart_master.parquet` (≈104 MB) no se versiona porque supera el límite de 100 MB por archivo de GitHub; se regenera ejecutando el notebook.
+La tabla maestra `instacart_master.parquet` (≈104 MB) no se versiona porque supera el límite de 100 MB por archivo de GitHub; se regenera ejecutando `lesson_4_data_merging.ipynb`.
 
 ## 6. Limitaciones
 

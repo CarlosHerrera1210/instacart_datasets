@@ -3,5 +3,5 @@ __pycache__/
 .ipynb_checkpoints/
 data/raw/*.csv
 
-# Tabla maestra: supera el límite de 100 MB de GitHub; se regenera con notebooks/pandas_labs.ipynb
+# Tabla maestra: supera el límite de 100 MB de GitHub; se regenera con notebooks/lesson_4_data_merging.ipynb
 data/processed/instacart_master.parquet
